@@ -1,0 +1,16 @@
+{
+  "name": "seed",
+  "owner": {
+    "name": "limjeongsik"
+  },
+  "metadata": {
+    "description": "사용자 개입 없이 서비스를 끝까지 만드는 자율 개발 사이클 Claude Code 플러그인"
+  },
+  "plugins": [
+    {
+      "name": "seed",
+      "source": "./",
+      "description": "기획자 · 설계자 · 디자이너 · 개발자 · 테스터 에이전트가 사이클을 반복하며 서비스를 완성합니다"
+    }
+  ]
+}

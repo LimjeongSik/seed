@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-labelledby="title desc">
+  <title id="title">seed</title>
+  <desc id="desc">아이디어 한 줄의 씨앗에서 줄기가 자라며 사이클 01, 02, 03을 거칠 때마다 고리가 커지고 완성 기준을 채워 완성된 서비스로 자라는 흐름. 각 사이클은 기획, 설계 · 디자인, 개발, 테스트, 개선을 돈다</desc>
+  <style>
+    text { font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif; fill: #232A20; }
+    .title { font-size: 76px; font-weight: 800; letter-spacing: -2.5px; }
+    .lede { font-size: 23px; font-weight: 500; fill: #4D5A45; }
+    .mono { font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace; }
+    .cycle { font-size: 14px; font-weight: 700; fill: #3C8C4E; }
+    .dod { font-size: 13px; font-weight: 600; fill: #7A8072; }
+    .label { font-size: 17px; font-weight: 700; }
+    .note { font-size: 14px; font-weight: 500; fill: #7A8072; }
+  </style>
+
+  <rect width="1280" height="440" fill="#EEEDE4"/>
+
+  <text x="72" y="118" class="title">seed</text>
+  <text x="76" y="162" class="lede">아이디어 한 줄을 심으면, 다섯 에이전트가 사이클을 돌며 완성된 서비스로 키워 낸다.</text>
+
+  <!-- 땅 -->
+  <line x1="72" y1="352" x2="1208" y2="352" stroke="#D9D8CC" stroke-width="2"/>
+
+  <!-- 씨앗: 사용자의 한 줄 요청 -->
+  <ellipse cx="112" cy="354" rx="17" ry="11" transform="rotate(-24 112 354)" fill="#A0683F"/>
+  <text x="72" y="386" class="note">“헬스장 PT 예약 서비스”</text>
+
+  <!-- 줄기 -->
+  <path d="M118 346 C 170 312, 230 272, 288 272 M372 272 C 455 272, 455 256, 538 256 M642 256 C 725 256, 725 240, 808 240 M932 240 C 1022 240, 1052 250, 1112 240" fill="none" stroke="#3C8C4E" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- 사이클 01: 기획 · 설계/디자인 · 개발 · 테스트 · 개선 -->
+  <circle cx="330" cy="272" r="42" fill="#EEEDE4" stroke="#3C8C4E" stroke-width="3.5"/>
+  <circle cx="330.0" cy="230.0" r="5" fill="#232A20"/>
+  <circle cx="369.9" cy="259.0" r="5" fill="#232A20"/>
+  <circle cx="354.7" cy="306.0" r="5" fill="#232A20"/>
+  <circle cx="305.3" cy="306.0" r="5" fill="#232A20"/>
+  <circle cx="290.1" cy="259.0" r="5" fill="#232A20"/>
+  <path d="M353.1 228.2 L360.4 242.1 L344.9 239.6 Z" fill="#3C8C4E"/>
+  <text x="330" y="277" class="dod mono" text-anchor="middle">DoD 3/12</text>
+  <text x="330" y="338" class="cycle mono" text-anchor="middle">cycle 01</text>
+
+  <!-- 사이클 02: 기획 · 설계/디자인 · 개발 · 테스트 · 개선 -->
+  <circle cx="590" cy="256" r="52" fill="#EEEDE4" stroke="#3C8C4E" stroke-width="3.5"/>
+  <circle cx="590.0" cy="204.0" r="5" fill="#232A20"/>
+  <circle cx="639.5" cy="239.9" r="5" fill="#232A20"/>
+  <circle cx="620.6" cy="298.1" r="5" fill="#232A20"/>
+  <circle cx="559.4" cy="298.1" r="5" fill="#232A20"/>
+  <circle cx="540.5" cy="239.9" r="5" fill="#232A20"/>
+  <path d="M619.0 204.2 L626.2 218.0 L610.8 215.5 Z" fill="#3C8C4E"/>
+  <text x="590" y="261" class="dod mono" text-anchor="middle">DoD 8/12</text>
+  <text x="590" y="332" class="cycle mono" text-anchor="middle">cycle 02</text>
+
+  <!-- 사이클 03: 기획 · 설계/디자인 · 개발 · 테스트 · 개선 -->
+  <circle cx="870" cy="240" r="62" fill="#FFFFFF" stroke="#3C8C4E" stroke-width="3.5"/>
+  <circle cx="870.0" cy="178.0" r="6" fill="#232A20"/>
+  <circle cx="929.0" cy="220.8" r="6" fill="#232A20"/>
+  <circle cx="906.4" cy="290.2" r="6" fill="#232A20"/>
+  <circle cx="833.6" cy="290.2" r="6" fill="#232A20"/>
+  <circle cx="811.0" cy="220.8" r="6" fill="#232A20"/>
+  <path d="M904.9 180.1 L912.1 194.0 L896.7 191.4 Z" fill="#3C8C4E"/>
+  <text x="870" y="245" class="dod mono" text-anchor="middle">DoD 12/12</text>
+  <text x="870" y="326" class="cycle mono" text-anchor="middle">cycle 03</text>
+
+  <text x="870.0" y="162.0" class="note" text-anchor="middle">기획</text>
+  <text x="945.0" y="224.8" class="note" text-anchor="start">설계 · 디자인</text>
+  <text x="918.4" y="310.2" class="note" text-anchor="start">개발</text>
+  <text x="821.6" y="310.2" class="note" text-anchor="end">테스트</text>
+  <text x="795.0" y="224.8" class="note" text-anchor="end">개선</text>
+
+  <!-- 완성된 서비스 -->
+  <path d="M1112 240 C 1104 204, 1142 176, 1170 180 C 1168 212, 1140 238, 1112 240 Z" fill="#3C8C4E"/>
+  <path d="M1112 240 C 1108 214, 1082 200, 1062 208 C 1066 232, 1088 244, 1112 240 Z" fill="#5FAE6E"/>
+  <text x="1116" y="278" class="label" text-anchor="middle">완성된 서비스</text>
+  <text x="1116" y="300" class="note mono" text-anchor="middle">final-report.md</text>
+
+  <!-- 단계 -->
+  <text x="72" y="414" xml:space="preserve"><tspan font-size="17" font-weight="700" fill="#232A20">정찰</tspan> <tspan font-size="15" font-weight="500" fill="#7A8072">toolbox</tspan>   <tspan font-size="16" fill="#A6AA9C">→</tspan>   <tspan font-size="17" font-weight="700" fill="#232A20">기획</tspan> <tspan font-size="15" font-weight="500" fill="#7A8072">planner</tspan>   <tspan font-size="16" fill="#A6AA9C">→</tspan>   <tspan font-size="17" font-weight="700" fill="#232A20">설계 · 디자인</tspan> <tspan font-size="15" font-weight="500" fill="#7A8072">architect · designer</tspan>   <tspan font-size="16" fill="#A6AA9C">→</tspan>   <tspan font-size="17" font-weight="700" fill="#232A20">개발</tspan> <tspan font-size="15" font-weight="500" fill="#7A8072">developer</tspan>   <tspan font-size="16" fill="#A6AA9C">→</tspan>   <tspan font-size="17" font-weight="700" fill="#232A20">테스트 · 피드백</tspan> <tspan font-size="15" font-weight="500" fill="#7A8072">tester</tspan>   <tspan font-size="16" fill="#A6AA9C">→</tspan>   <tspan font-size="17" font-weight="700" fill="#232A20">개선</tspan> <tspan font-size="15" font-weight="500" fill="#7A8072">↻</tspan></text>
+</svg>

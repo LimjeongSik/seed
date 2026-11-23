@@ -34,7 +34,7 @@ claude --permission-mode bypassPermissions
 |---|---|
 | `/seed:plant <서비스> [--max-cycles N]` | 씨앗을 심고 완성까지 사이클을 돌림 (기본 최대 10사이클) |
 | `/seed:status` | 지금 몇 번째 사이클 · 어느 단계인지, 백로그와 완성 기준 진행률, 최근 테스트 판정 |
-| `/seed:stop` | 멈춤. 도는 중이면 `Esc`로 끊은 뒤 입력 |
+| `/seed:stop` | 멈춤. 도는 중이면 `Esc`로 끊은 뒤 입력. 다른 세션에서도 멈출 수 있음 |
 | `/seed:resume` | 멈춘 단계부터 이어서 진행 |
 
 "어디까지 됐어?", "멈춰", "이어서 해줘"처럼 말해도 같은 명령이 실행됩니다. 이미 있는 코드 위에서 시작하면 그 코드를 기반으로 쌓아 올립니다.
@@ -42,6 +42,8 @@ claude --permission-mode bypassPermissions
 ## 결과물
 
 서비스 코드는 프로젝트 루트에, 진행 기록과 역할별 문서는 `.seed/`에 남습니다. 사이클마다 로컬 git 커밋이 하나씩 쌓이고, push는 하지 않습니다.
+
+시작할 때 이미 있던 미커밋 변경(수정 · 스테이징 · untracked 파일)은 사용자 작업으로 기록해 두고 seed 커밋에 넣지 않습니다. seed가 그 파일을 고쳐야 했다면 커밋에서 빼고 `log.md`에 목록을 남기므로, 작업 트리에서 직접 정리하면 됩니다.
 
 ```
 <프로젝트>/
@@ -148,7 +150,10 @@ seed는 혼자 다 만들려 하지 않습니다. 시작할 때 이 세션에서
 | Stop 훅 | 완성 전에는 턴 종료를 막고 다음 단계로 보냄. 에이전트 결과를 기다리는 중이면 막지 않고, 상태 변화 없이 3번 연속 막히면 `stalled`로 표시하고 놓아줌 |
 | 질문 차단 | 실행 중 `AskUserQuestion`을 막고, 직접 정해서 `decisions.md`에 기록하게 함 |
 | 압축 후 이어가기 | 컨텍스트가 압축되면 상태 파일을 다시 읽고 현재 단계부터 이어감 |
-| 실행 주인 | 실행을 시작한 세션에만 위 장치가 걸림. 같은 폴더의 다른 세션은 방해받지 않음 |
+| 실행 주인 | 실행을 시작하거나 이어받은 세션에만 위 장치가 걸림. 같은 폴더의 다른 세션은 방해받지 않고, 진행 중인 실행을 가로채지도 못함 |
+| 상태 전이 스크립트 | 시작 · 중단 · 재개 · 다음 사이클 · 완료를 `scripts/seed.sh`가 잠금 아래에서 검증하며 바꿈. 최대 사이클과 개선 횟수를 넘지 않음 |
+| 실행 소속 검사 | 모든 에이전트를 생성 시점의 실행 번호에 묶고, 지금 실행에 속한 에이전트만 파일을 고칠 수 있게 함. 중단 · 재개(같은 세션 포함) 전의 에이전트는 막히고, 뒤늦게 도착한 결과도 실행 번호로 걸러냄 |
+| 검증 대상 기록 | 테스터가 판정한 작업 트리를 기록해 두고, gate 단계에서 코드가 바뀌면 다시 검증한 뒤 완성을 판단 |
 
 ## 원칙
 
@@ -176,10 +181,13 @@ commands/              plant · resume · status · stop
 skills/cycle/          오케스트레이터 플레이북
 agents/                planner · architect · designer · developer · tester
 shared/                autonomy.md · workspace.md (실행 시 .seed/rules/로 복사) · toolbox-guide.md
-hooks/hooks.json       Stop · PreToolUse · SessionStart · UserPromptSubmit
-scripts/               훅 스크립트 (bash, 외부 의존 없음)
+hooks/hooks.json       Stop · PreToolUse · SessionStart · SubagentStart
+scripts/               seed.sh(상태 전이) · core.sh · 훅 스크립트 (bash, 외부 의존 없음)
+tests/run.sh           상태 전이 · 훅 회귀 테스트
 assets/banner.svg
 ```
+
+훅이나 상태 전이를 고쳤으면 `bash tests/run.sh`로 회귀 테스트를 돌립니다(다른 세션의 시작, 중단 후 재개, 에이전트의 실행 소속, 최대 사이클, 기존 변경 보존 · 빈 기준선, 검증 후 변경).
 
 저장소를 받아 고친 뒤에는 `--plugin-dir`로 빈 폴더에서 써 봅니다. 설치한 seed와 함께 쓰면 같은 플러그인이 두 번 잡히니, 먼저 `/plugin`에서 설치한 쪽을 꺼 두세요.
 

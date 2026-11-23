@@ -1,10 +1,14 @@
 {
-  "description": "seed 자율 사이클: 완성 전 멈춤 방지 · 사용자 질문 차단 · 압축 후 이어가기",
+  "description": "seed 자율 사이클: 완성 전 멈춤 방지 · 사용자 질문 차단 · 중단된 에이전트 차단 · 압축 후 이어가기",
   "hooks": {
     "Stop": [
       {
         "hooks": [
-          { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/stop.sh\"", "timeout": 10 }
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/stop.sh\"",
+            "timeout": 10
+          }
         ]
       }
     ],
@@ -12,7 +16,21 @@
       {
         "matcher": "AskUserQuestion",
         "hooks": [
-          { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/deny-ask.sh\"", "timeout": 10 }
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/deny-ask.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/guard-agent.sh\"",
+            "timeout": 10
+          }
         ]
       }
     ],
@@ -20,14 +38,22 @@
       {
         "matcher": "startup|resume|compact|clear",
         "hooks": [
-          { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/session-start.sh\"", "timeout": 10 }
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/session-start.sh\"",
+            "timeout": 10
+          }
         ]
       }
     ],
-    "UserPromptSubmit": [
+    "SubagentStart": [
       {
         "hooks": [
-          { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/claim.sh\"", "timeout": 10 }
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/agent-start.sh\"",
+            "timeout": 10
+          }
         ]
       }
     ]
